@@ -6,7 +6,8 @@ import logo from './logo.svg';
 import './App.css';
 import Button from "./components/button"
 import adjectiveList from "./components/adjectiveList"
-import beerList from "./components/beerList"
+import beerObject from "./components/beerList"
+import {beerList} from "./components/beerList"
 import beerAdjectives from "./components/beerAdjectives"
 import "./components/beer.css"
 
@@ -34,19 +35,31 @@ class App extends Component {
     this.state = {
       counter: 0,
       text: "Get your Beer Name",
-      name: this.generateName()
+      beer: {
+        ...this.generateBeer(),
+        beerImage:"https://dc8gwjuur0w0x.cloudfront.net/lists/avatars/000/000/047/original_o-PINT-GLASS-BEER-facebook.jpg?1473216955",
+        fullName: "Welcome"
+      }
     };
   }
 
   click = () => {
     this.setState(
-      {name: this.generateName()}
+      {beer: this.generateBeer()},
     )
   }
 
-  generateName = () => {
-    return beerAdjectives[Math.floor(Math.random()*beerAdjectives.length)] + " " + adjectiveList[Math.floor(Math.random()*adjectiveList.length)] + " " + beerList[Math.floor(Math.random()*beerList.length)]
+  generateBeer = () => {
+    var beer = beerObject[Math.floor(Math.random()*beerObject.length)];
+    return {
+      beerName:beer.name,
+      beerImage:beer.image ,
+      fullName:beerAdjectives[Math.floor(Math.random()*beerAdjectives.length)] + " " + adjectiveList[Math.floor(Math.random()*adjectiveList.length)] + " " +
+      beer.name
+      }
   }
+
+
 
   render() {
     return (
@@ -55,12 +68,12 @@ class App extends Component {
           <h2>Welcome to the world famous Beer name generator</h2>
         </div>
         <p className="App-intro">
-          {this.state.text}
         </p>
         <Button onClick={this.click} />
         <p></p>
-        <NameTag name={this.generateName()} />
-        <img className="beer1" src="https://dc8gwjuur0w0x.cloudfront.net/lists/avatars/000/000/047/original_o-PINT-GLASS-BEER-facebook.jpg?1473216955"></img>
+        <NameTag name={this.state.beer.fullName} />
+        <p></p>
+        <img className="beer1" src={this.state.beer.beerImage}></img>
 
       </div>
     );
