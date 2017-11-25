@@ -49,12 +49,16 @@ class App extends Component {
     )
   }
 
+  getRandomElement = (arr) => {
+    return arr[Math.floor(Math.random()*arr.length)]
+  }
+
   generateBeer = () => {
-    var beer = beerObject[Math.floor(Math.random()*beerObject.length)];
+    var beer = this.getRandomElement(beerObject);
     return {
       beerName:beer.name,
       beerImage:beer.image ,
-      fullName:beerAdjectives[Math.floor(Math.random()*beerAdjectives.length)] + " " + adjectiveList[Math.floor(Math.random()*adjectiveList.length)] + " " +
+      fullName:this.getRandomElement(beerAdjectives) + " " + this.getRandomElement(adjectiveList) + " " +
       beer.name
       }
   }
@@ -69,7 +73,7 @@ class App extends Component {
         </div>
         <p className="App-intro">
         </p>
-        <Button onClick={this.click} />
+        <Button className="btn" onClick={this.click} />
         <p></p>
         <NameTag name={this.state.beer.fullName} />
         <p></p>
