@@ -1,5 +1,6 @@
 //react is a framework of JS
 //component is the most undefined - we are creating App which extends from Component
+//component is the parent class which react needs to render 
 
 import React, { Component } from 'react';
 import logo from './logo.svg';
